@@ -3,6 +3,7 @@ package io.github.aurelienpillevesse;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -19,7 +20,13 @@ public class MyResource {
      */
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String getBook() {
-        return "getBook()";
+    public String getBook(
+    	@QueryParam("account") int id,
+    	@QueryParam("isbn") int isbn,
+    	@QueryParam("from") String from,
+    	@QueryParam("to") String to,
+    	@QueryParam("corr") int corr
+    ) {
+        return id + ", " + isbn + ", " + from + ", " + to + ", " + corr;
     }
 }
