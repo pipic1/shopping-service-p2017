@@ -4,7 +4,12 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 
 /**
  * Root resource (exposed at "myresource" path)
@@ -26,7 +31,11 @@ public class MyResource {
     	@QueryParam("from") String from,
     	@QueryParam("to") String to,
     	@QueryParam("corr") int corr
-    ) {
-        return id + ", " + isbn + ", " + from + ", " + to + ", " + corr;
+    ) {    	
+    	Client client = ClientBuilder.newClient();
+    	WebTarget target = client.target("https://stock-service-p2017.herokuapp.com").path("bookStock");
+    	 
+    	Response r = target.request(MediaType.TEXT_PLAIN).get();
+        return id + ", " + isbn + ", " + from + ", " + to + ", " + corr + ", response: " + r;
     }
 }
