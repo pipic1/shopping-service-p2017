@@ -44,7 +44,7 @@ public class MyResource {
     	//verification si isbn est correct
     	try {
 			stmt = getConnection().createStatement();
-    		stmt.executeQuery("CREATE TABLE BOOK(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, AUTHOR CHAR(255) NOT NULL, ISBN CHAR(50))");
+    		stmt.executeQuery("SELECT id FROM BOOK");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
