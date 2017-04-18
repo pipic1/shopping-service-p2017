@@ -1,5 +1,11 @@
 package io.github.aurelienpillevesse;
 
+import java.net.URISyntaxException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -12,7 +18,7 @@ import javax.ws.rs.core.Response;
 
 
 /**
- * Root resource (exposed at "myresource" path)
+ * Root resource (exposed at "book" path)
  */
 @Path("book")
 public class MyResource {
@@ -31,11 +37,34 @@ public class MyResource {
     	@QueryParam("from") String from,
     	@QueryParam("to") String to,
     	@QueryParam("corr") int corr
-    ) {    	
-    	Client client = ClientBuilder.newClient();
-    	WebTarget target = client.target("https://stock-service-p2017.herokuapp.com").path("bookStock");
-    	 
-    	Response r = target.request(MediaType.TEXT_PLAIN).get();
-        return id + ", " + isbn + ", " + from + ", " + to + ", " + corr + ", response: " + r.readEntity(String.class);
+    ) {
+    	Boolean isbnExists = null;
+    	Statement stmt = null;
+    	//database connexion
+    	//verification si isbn est correct
+    	try {
+			stmt = getConnection().createStatement();
+    		stmt.executeQuery("CREATE TABLE BOOK(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, AUTHOR CHAR(255) NOT NULL, ISBN CHAR(50))");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return stmt.toString();
+    	//si oui
+    	/*if(isbnExists) {
+	    	Client client = ClientBuilder.newClient();
+	    	WebTarget target = client.target("https://stock-service-p2017.herokuapp.com").path("bookStock");
+	    	Response r = target.request(MediaType.TEXT_PLAIN).get();
+	    	//return id + ", " + isbn + ", " + from + ", " + to + ", " + corr + ", response: " + r.readEntity(String.class);
+	    	return "Book available";
+    	}*/
+    	
+    	//else
+    	//return "Book unvailable";
+    	
+    }
+    
+    private static Connection getConnection() throws URISyntaxException, SQLException {
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
+        return DriverManager.getConnection(dbUrl);
     }
 }
