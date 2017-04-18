@@ -36,6 +36,6 @@ public class MyResource {
     	WebTarget target = client.target("https://stock-service-p2017.herokuapp.com").path("bookStock");
     	 
     	Response r = target.request(MediaType.TEXT_PLAIN).get();
-        return id + ", " + isbn + ", " + from + ", " + to + ", " + corr + ", response: " + r;
+        return id + ", " + isbn + ", " + from + ", " + to + ", " + corr + ", response: " + r.readEntity(String.class);
     }
 }
