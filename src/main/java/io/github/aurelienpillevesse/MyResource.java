@@ -44,7 +44,7 @@ public class MyResource {
     	//verification si isbn est correct
     	try {
 			stmt = getConnection().createStatement();
-    		stmt.executeQuery("SELECT id FROM BOOK");
+    		stmt.executeQuery("SELECT id FROM BOOK where isbn = '1'");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -56,11 +56,10 @@ public class MyResource {
 	    	Response r = target.request(MediaType.TEXT_PLAIN).get();
 	    	//return id + ", " + isbn + ", " + from + ", " + to + ", " + corr + ", response: " + r.readEntity(String.class);
 	    	return "Book available";
-    	}*/
+    	}
     	
     	//else
-    	//return "Book unvailable";
-    	
+    	//return "Book unvailable";*/
     }
     
     private static Connection getConnection() throws URISyntaxException, SQLException {
