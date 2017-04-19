@@ -40,17 +40,16 @@ public class MyResource {
     ) {
     	Boolean isbnExists = null;
     	Statement stmt = null;
-    	return System.getenv("DATABASE_URL") + " " + System.getenv("JDBC_DATABASE_URL");
-    	//System.exit(0);
+
     	//database connexion
     	//verification si isbn est correct
-    	/*try {
+    	try {
 			stmt = getConnection().createStatement();
     		stmt.executeQuery("SELECT id FROM BOOK where isbn = '1'");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	return stmt.toString();*/
+    	return stmt.toString();
     	//si oui
     	/*if(isbnExists) {
 	    	Client client = ClientBuilder.newClient();
