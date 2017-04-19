@@ -40,6 +40,9 @@ public class MyResource {
     ) {
     	Boolean isbnExists = null;
     	Statement stmt = null;
+    	System.out.println(System.getenv("JDBC_DATABASE_URL"));
+    	System.out.println(System.getenv("DATABASE_URL"));
+    	System.exit(0);
     	//database connexion
     	//verification si isbn est correct
     	try {
