@@ -40,23 +40,24 @@ public class MyResource {
     	@QueryParam("corr") int corr
     ) {
     	Boolean isbnExists = null;
-
+    	Statement st;
+    	ResultSet rs;
+    	String output = "";
     	//database connexion
     	//verification si isbn est correct
-	System.out.println('before');
+    	output += "before\n";
     	try {		
-		Statement st = db.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM books");
-		while (rs.next()) {
-		    System.out.println(rs.getString("book_name"));
+			st = getConnection().createStatement();
+			rs = st.executeQuery("SELECT * FROM books");
+			output+=rs.getString("book_name");
+			while (rs.next()) {
+			    output += rs.getString("book_name");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			output += "ici\n";
 		}
-		//rs.close();
-		//st.close();
-	} catch (Exception e) {
-		e.printStackTrace();
-		System.out.println('ici');
-	}
-    	return;
+    	return output;
     	//si oui
     	/*if(isbnExists) {
 	    	Client client = ClientBuilder.newClient();
