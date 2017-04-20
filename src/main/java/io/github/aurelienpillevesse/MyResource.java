@@ -44,8 +44,6 @@ public class MyResource {
     	Statement st;
     	ResultSet rs;
     	String output = "";
-    	//database connexion
-    	//verification si isbn est correct
     	output += "before\n";
     	try {		
 			st = getConnection().createStatement();
@@ -69,7 +67,7 @@ public class MyResource {
 	    	//return id + ", " + isbn + ", " + from + ", " + to + ", " + corr + ", response: " + r.readEntity(String.class);
 	    	return "Book available";
     	}
-    	
+    	//si non
     	//else
     	//return "Book unvailable";*/
     }
