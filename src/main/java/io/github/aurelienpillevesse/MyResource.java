@@ -43,19 +43,20 @@ public class MyResource {
 
     	//database connexion
     	//verification si isbn est correct
+	System.out.println('before');
     	try {		
 		Statement st = db.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM books WHERE isbn = 1418548484");
+		ResultSet rs = st.executeQuery("SELECT * FROM books");
 		while (rs.next()) {
-		    System.out.print("Colonne 1 renvoyée ");
-		    System.out.println(rs.getString(1));
+		    System.out.println(rs.getString("book_name"));
 		}
-		rs.close();
-		st.close();
+		//rs.close();
+		//st.close();
 	} catch (Exception e) {
 		e.printStackTrace();
+		System.out.println('ici');
 	}
-    	return 'yo';
+    	return;
     	//si oui
     	/*if(isbnExists) {
 	    	Client client = ClientBuilder.newClient();
