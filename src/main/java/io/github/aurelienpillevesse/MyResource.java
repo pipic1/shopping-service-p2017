@@ -49,7 +49,7 @@ public class MyResource {
     	output += "before\n";
     	try {		
 			st = getConnection().createStatement();
-			rs = st.executeQuery("select * from books;");
+			rs = st.executeQuery("select * from books");
 			output+=rs.getString("book_name");
 			while (rs.next()) {
 			    output += rs.getString("book_name");
