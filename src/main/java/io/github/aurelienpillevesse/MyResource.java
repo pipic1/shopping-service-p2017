@@ -44,11 +44,11 @@ public class MyResource {
     	//database connexion
     	//verification si isbn est correct
     	try {
-			stmt = getConnection().createStatement();
-    		stmt.executeQuery("SELECT id FROM BOOK where isbn = '1'");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		stmt = getConnection().createStatement();
+    		stmt.executeQuery("SELECT * FROM books");
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
     	return stmt.toString();
     	//si oui
     	/*if(isbnExists) {
