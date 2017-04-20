@@ -46,7 +46,7 @@ public class MyResource {
     	String output = "";
     	output += "before\n";
     	try {		
-			st = getConnection().createStatement();
+			st = getConnection2().createStatement();
 			rs = st.executeQuery("select * from books");
 			output+=rs.getString("book_name");
 			while (rs.next()) {
