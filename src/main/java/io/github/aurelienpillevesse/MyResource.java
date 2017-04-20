@@ -39,17 +39,15 @@ public class MyResource {
     	@QueryParam("corr") int corr
     ) {
     	Boolean isbnExists = null;
-    	Statement st = null;
 
     	//database connexion
     	//verification si isbn est correct
-    	try {
-		st = getConnection().createStatement();
+    	try {		
+		Statement st = db.createStatement();
 		ResultSet rs = st.executeQuery("SELECT * FROM books WHERE isbn = 1418548484");
 		while (rs.next()) {
 		    System.out.print("Colonne 1 renvoyée ");
 		    System.out.println(rs.getString(1));
-		    System.out.println(rs.toString());
 		}
 		rs.close();
 		st.close();
