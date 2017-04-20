@@ -54,6 +54,8 @@ public class MyResource {
 			while (rs.next()) {
 			    output += rs.getString("book_name");
 			}
+			rs.close();
+			st.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			output += "ici\n";
