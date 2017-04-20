@@ -12,11 +12,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 
 /**
@@ -50,6 +46,7 @@ public class MyResource {
 			rs = st.executeQuery("select * from books");
 			output+=rs.getString("book_name");
 			while (rs.next()) {
+				System.out.println("Column 1 returned");
 			    output += rs.getString("book_name");
 			}
 			rs.close();
