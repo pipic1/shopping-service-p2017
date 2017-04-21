@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
@@ -30,24 +31,24 @@ public class MyResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getBook(
-    	@QueryParam("account") int id,
-    	@QueryParam("isbn") int isbn,
-    	@QueryParam("from") String from,
-    	@QueryParam("to") String to,
-    	@QueryParam("corr") int corr
+    	//@QueryParam("account") int id,
+    	@QueryParam("isbn") int isbn
+    	//@QueryParam("from") String from,
+    	//@QueryParam("to") String to,
+    	//@QueryParam("corr") int corr
     ) {
     	Boolean isbnExists = null;
-    	Statement st;
+    	PreparedStatement  st;
     	ResultSet rs;
     	String output = "";
     	output += "before\n";
     	try {		
-			st = getConnection2().createStatement();
-			rs = st.executeQuery("select * from books");
-			//output+=rs.getString("book_name");
+			st = getConnection().prepareStatement("select * from books where ISBN = ? ");
+			st.setInt(1,isbn);
+			rs = st.executeQuery();
 			while (rs.next()) {
 				System.out.println("Column 1 returned");
-			    output += rs.getString("*");
+			    output += rs.getString("book_name");
 			}
 			rs.close();
 			st.close();
