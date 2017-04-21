@@ -42,10 +42,10 @@ public class MyResource {
     	String output = "";
     	output += "isbn = "+ isbn + "\n";
     	try {		
-			//PreparedStatement st = getConnection().prepareStatement("select * from books where ISBN = ? ");
-			//st.setInt(1,isbn);
-			Statement st = getConnection().createStatement();
-			rs = st.executeQuery("select * from books");
+			PreparedStatement st = getConnection().prepareStatement("select * from books where ISBN = ? ");
+			st.setInt(1,isbn);
+			//Statement st = getConnection().createStatement();
+			rs = st.executeQuery();
 			while (rs.next()) {
 			    output += rs.getString("isbn") + "\n";
 			    output += rs.getString("book_name") + "\n";
@@ -58,17 +58,27 @@ public class MyResource {
 			output += "ici\n";
 		}
     	return output;
-    	//si oui
-    	/*if(isbnExists) {
-	    	Client client = ClientBuilder.newClient();
-	    	WebTarget target = client.target("https://stock-service-p2017.herokuapp.com").path("bookStock");
-	    	Response r = target.request(MediaType.TEXT_PLAIN).get();
-	    	//return id + ", " + isbn + ", " + from + ", " + to + ", " + corr + ", response: " + r.readEntity(String.class);
-	    	return "Book available";
-    	}
-    	//si non
-    	//else
-    	//return "Book unvailable";*/
+    }
+    
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getBook() {
+    	ResultSet rs;
+    	String output = "Livre: ";
+    	try {		
+			Statement st = getConnection().createStatement();
+			rs = st.executeQuery("select * from books");
+			while (rs.next()) {
+			    output += rs.getString("isbn") + ", ";
+			    output += rs.getString("book_name") + ", ";
+			    output += rs.getString("publisher_name") + "\n";
+			}
+			rs.close();
+			st.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return output;
     }
     
     private static Connection getConnection() throws URISyntaxException, SQLException {
