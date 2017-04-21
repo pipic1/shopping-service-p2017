@@ -59,7 +59,7 @@ public class MyResource {
 		}
     	return output;
     }
-    
+    /*
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getBook() {
@@ -80,7 +80,7 @@ public class MyResource {
 		}
     	return output;
     }
-    
+    */
     private static Connection getConnection() throws URISyntaxException, SQLException {
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         return DriverManager.getConnection(dbUrl);
