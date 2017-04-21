@@ -28,7 +28,7 @@ public class MyResource {
      * @return String that will be returned as a text/plain response.
      */
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public String getBook(
     	@QueryParam("account") int id,
     	@QueryParam("isbn") int isbn,
@@ -47,7 +47,7 @@ public class MyResource {
 			//output+=rs.getString("book_name");
 			while (rs.next()) {
 				System.out.println("Column 1 returned");
-			    output += rs.getString("book_name");
+			    output += rs.toString();
 			}
 			rs.close();
 			st.close();
