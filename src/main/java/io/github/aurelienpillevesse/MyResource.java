@@ -19,7 +19,7 @@ import javax.ws.rs.core.MediaType;
 /**
  * Root resource (exposed at "book" path)
  */
-@Path("book")
+@Path("books")
 public class MyResource {
 
     /**
@@ -29,6 +29,7 @@ public class MyResource {
      * @return String that will be returned as a text/plain response.
      */
     @GET
+    @Path("book")
     @Produces(MediaType.TEXT_PLAIN)
     public String getBook(
     	//@QueryParam("account") int id,
@@ -47,8 +48,8 @@ public class MyResource {
 			//Statement st = getConnection().createStatement();
 			rs = st.executeQuery();
 			while (rs.next()) {
-			    output += rs.getString("isbn") + "\n";
-			    output += rs.getString("book_name") + "\n";
+			    output += rs.getString("isbn") + ", ";
+			    output += rs.getString("book_name") + ", ";
 			    output += rs.getString("publisher_name") + "\n";
 			}
 			rs.close();
@@ -59,7 +60,7 @@ public class MyResource {
 		}
     	return output;
     }
-    /*
+   
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getBook() {
@@ -80,7 +81,7 @@ public class MyResource {
 		}
     	return output;
     }
-    */
+    
     private static Connection getConnection() throws URISyntaxException, SQLException {
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         return DriverManager.getConnection(dbUrl);
