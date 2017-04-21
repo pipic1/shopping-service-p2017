@@ -38,17 +38,18 @@ public class MyResource {
     	//@QueryParam("corr") int corr
     ) {
     	Boolean isbnExists = null;
-    	PreparedStatement  st;
     	ResultSet rs;
     	String output = "";
-    	output += "before\n";
+    	output += "isbn = "+ isbn + "\n";
     	try {		
-			st = getConnection().prepareStatement("select * from books where ISBN = ? ");
-			st.setInt(1,isbn);
-			rs = st.executeQuery();
+			//PreparedStatement st = getConnection().prepareStatement("select * from books where ISBN = ? ");
+			//st.setInt(1,isbn);
+			Statement st = getConnection().createStatement();
+			rs = st.executeQuery("select * from books");
 			while (rs.next()) {
-				System.out.println("Column 1 returned");
-			    output += rs.getString("book_name");
+			    output += rs.getString("isbn") + "\n";
+			    output += rs.getString("book_name") + "\n";
+			    output += rs.getString("publisher_name") + "\n";
 			}
 			rs.close();
 			st.close();
