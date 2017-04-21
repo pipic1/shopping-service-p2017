@@ -42,12 +42,12 @@ public class MyResource {
     	String output = "";
     	output += "before\n";
     	try {		
-			st = getConnection().createStatement();
+			st = getConnection2().createStatement();
 			rs = st.executeQuery("select * from books");
 			//output+=rs.getString("book_name");
 			while (rs.next()) {
 				System.out.println("Column 1 returned");
-			    output += rs.toString();
+			    output += rs.getString("*");
 			}
 			rs.close();
 			st.close();
