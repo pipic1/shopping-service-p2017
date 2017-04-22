@@ -68,7 +68,7 @@ public class MyResource {
     @Produces(MediaType.TEXT_PLAIN)
     public String getBook(
     	@QueryParam("account") int id,
-    	@QueryParam("isbn") string isbn,
+    	@QueryParam("isbn") String isbn,
     	@QueryParam("from") String from,
     	@QueryParam("to") String to,
     	@QueryParam("corr") int corr
