@@ -92,7 +92,10 @@ public class MyResource {
 	    
 	if(output == isbn && isbn != 0) {
 	    	Client client = ClientBuilder.newClient();
-	    	WebTarget target = client.target("https://stock-service-p2017.herokuapp.com").path("bookStock");
+	    	WebTarget target = client
+	    			.target("https://stock-service-p2017.herokuapp.com")
+	    			.path("bookStock")
+	    			.queryParam("isbn", isbn);
 	    	Response r = target.request(MediaType.TEXT_PLAIN).get();
 	    	return "(isbn available) - response: " + r.readEntity(String.class);
 	    	//return "Book available";
