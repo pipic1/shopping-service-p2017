@@ -78,7 +78,7 @@ public class MyResource {
     	String output = null;
     	
     	try {		
-			st = getConnection().prepareStatement("select isbn from books where isbn = ?");
+			st = getConnection().prepareStatement("select * from books where isbn = ?");
 			st.setString(1, isbn); 
 			rs = st.executeQuery();
 			while (rs.next()) {
@@ -90,15 +90,14 @@ public class MyResource {
 			e.printStackTrace();
 		}
 	    
-	return isbn + ' ' + output;
-	/*if(output == isbn) {
+	if(output == isbn && isbn != null) {
 	    	Client client = ClientBuilder.newClient();
 	    	WebTarget target = client.target("https://stock-service-p2017.herokuapp.com").path("bookStock");
 	    	Response r = target.request(MediaType.TEXT_PLAIN).get();
 	    	return "(isbn available) - response: " + r.readEntity(String.class);
 	    	//return "Book available";
     	}
-    	return "Book unvailable";*/
+    	return "Book unvailable";
     }
     
     private static Connection getConnection() throws URISyntaxException, SQLException {
