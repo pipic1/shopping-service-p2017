@@ -68,14 +68,14 @@ public class MyResource {
     @Produces(MediaType.TEXT_PLAIN)
     public String getBook(
     	@QueryParam("account") int id,
-    	@QueryParam("isbn") int isbn,
+    	@DefaultValue("-1") @QueryParam("isbn") int isbn,
     	@QueryParam("from") String from,
     	@QueryParam("to") String to,
     	@QueryParam("corr") int corr
     ) {
     	ResultSet rs = null;
     	PreparedStatement st = null;
-    	int output = 0;
+    	int output = -1;
     	
     	try {		
 			st = getConnection().prepareStatement("select * from books where isbn = ?");
@@ -90,7 +90,7 @@ public class MyResource {
 			e.printStackTrace();
 		}
 	    
-	if(output == isbn && isbn != 0) {
+	if(output == isbn && isbn != -1) {
 	    	Client client = ClientBuilder.newClient();
 	    	WebTarget target = client
 	    			.target("https://stock-service-p2017.herokuapp.com")
