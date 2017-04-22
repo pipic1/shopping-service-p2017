@@ -75,7 +75,7 @@ public class MyResource {
     ) {
     	ResultSet rs = null;
     	PreparedStatement st = null;
-    	String output = null;
+    	int output = 0;
     	
     	try {		
 			st = getConnection().prepareStatement("select * from books where isbn = ?");
@@ -90,7 +90,7 @@ public class MyResource {
 			e.printStackTrace();
 		}
 	    
-	if(output == isbn && isbn != null) {
+	if(output == isbn && isbn != 0) {
 	    	Client client = ClientBuilder.newClient();
 	    	WebTarget target = client.target("https://stock-service-p2017.herokuapp.com").path("bookStock");
 	    	Response r = target.request(MediaType.TEXT_PLAIN).get();
