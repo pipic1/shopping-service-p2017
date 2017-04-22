@@ -68,7 +68,7 @@ public class MyResource {
     @Produces(MediaType.TEXT_PLAIN)
     public String getBook(
     	@QueryParam("account") int id,
-    	@QueryParam("isbn") String isbn,
+    	@QueryParam("isbn") int isbn,
     	@QueryParam("from") String from,
     	@QueryParam("to") String to,
     	@QueryParam("corr") int corr
@@ -79,7 +79,7 @@ public class MyResource {
     	
     	try {		
 			st = getConnection().prepareStatement("select * from books where isbn = ?");
-			st.setString(1, isbn); 
+			st.setInt(1, isbn); 
 			rs = st.executeQuery();
 			while (rs.next()) {
 			    output = rs.getString("isbn");
