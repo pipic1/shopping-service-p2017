@@ -74,8 +74,9 @@ public class MyResource {
     	@QueryParam("corr") int corr
     ) {
     	ResultSet rs = null;
-	PreparedStatement st = null;
+    	PreparedStatement st = null;
     	String output = null;
+    	
     	try {		
 			st = getConnection().prepareStatement("select isbn from books where isbn = ?");
 			st.setString(1, isbn); 
@@ -89,7 +90,8 @@ public class MyResource {
 			e.printStackTrace();
 		}
 	    
-	    
+	System.out.println(output);
+	System.out.println(isbn);
 	if(output == isbn) {
 	    	Client client = ClientBuilder.newClient();
 	    	WebTarget target = client.target("https://stock-service-p2017.herokuapp.com").path("bookStock");
