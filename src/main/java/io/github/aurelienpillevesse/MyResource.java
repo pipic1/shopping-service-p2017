@@ -19,7 +19,7 @@ import javax.ws.rs.core.MediaType;
 /**
  * Root resource (exposed at "book" path)
  */
-@Path("books")
+@Path("book")
 public class MyResource {
 
     /**
@@ -28,7 +28,7 @@ public class MyResource {
      *
      * @return String that will be returned as a text/plain response.
      */
-    @GET
+    /*@GET
     @Path("book")
     @Produces(MediaType.TEXT_PLAIN)
     public String getBook(
@@ -59,27 +59,42 @@ public class MyResource {
 			output += "ici\n";
 		}
     	return output;
-    }
+    }*/
    
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String getBook() {
-    	ResultSet rs;
-    	String output = "Livre: ";
+    public String getBook(
+    	@QueryParam("account") int id,
+    	@QueryParam("isbn") string isbn,
+    	@QueryParam("from") String from,
+    	@QueryParam("to") String to,
+    	@QueryParam("corr") int corr
+    ) {
+    	ResultSet rs = null;
+	PreparedStatement st = null;
+    	String output = null;
     	try {		
-			Statement st = getConnection().createStatement();
-			rs = st.executeQuery("select * from books");
+			st = getConnection().prepareStatement("select isbn from books where isbn = ?");
+			st.setString(1, isbn); 
+			rs = st.executeQuery();
 			while (rs.next()) {
-			    output += rs.getString("isbn") + ", ";
-			    output += rs.getString("book_name") + ", ";
-			    output += rs.getString("publisher_name") + "\n";
+			    output = rs.getString("isbn");
 			}
 			rs.close();
 			st.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	return output;
+	    
+	    
+	if(output == isbn) {
+	    	Client client = ClientBuilder.newClient();
+	    	WebTarget target = client.target("https://stock-service-p2017.herokuapp.com").path("bookStock");
+	    	Response r = target.request(MediaType.TEXT_PLAIN).get();
+	    	return "(isbn available) - response: " + r.readEntity(String.class);
+	    	//return "Book available";
+    	}
+    	return "Book unvailable";
     }
     
     private static Connection getConnection() throws URISyntaxException, SQLException {
