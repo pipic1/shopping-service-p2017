@@ -90,16 +90,15 @@ public class MyResource {
 			e.printStackTrace();
 		}
 	    
-	System.out.println(output);
-	System.out.println(isbn);
-	if(output == isbn) {
+	return isbn + ' ' + output;
+	/*if(output == isbn) {
 	    	Client client = ClientBuilder.newClient();
 	    	WebTarget target = client.target("https://stock-service-p2017.herokuapp.com").path("bookStock");
 	    	Response r = target.request(MediaType.TEXT_PLAIN).get();
 	    	return "(isbn available) - response: " + r.readEntity(String.class);
 	    	//return "Book available";
     	}
-    	return "Book unvailable";
+    	return "Book unvailable";*/
     }
     
     private static Connection getConnection() throws URISyntaxException, SQLException {
