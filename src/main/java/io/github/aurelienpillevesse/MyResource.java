@@ -82,7 +82,7 @@ public class MyResource {
 			st.setInt(1, isbn); 
 			rs = st.executeQuery();
 			while (rs.next()) {
-			    output = rs.getString("isbn");
+			    output = rs.getInt("isbn");
 			}
 			rs.close();
 			st.close();
