@@ -4,14 +4,8 @@
  */
 package io.github.aurelienpillevesse.model;
 
-import java.io.Serializable;  
-import javax.xml.bind.annotation.XmlElement; 
-import javax.xml.bind.annotation.XmlRootElement; 
-@XmlRootElement(name = "book") 
+public class Book {
 
-public class Book implements Serializable {
-
-   private static final long serialVersionUID = 1L;
    private int isbn;
    private String bookName; 
    private String publisherName;
@@ -32,7 +26,6 @@ public class Book implements Serializable {
       return isbn; 
    }
    
-   @XmlElement 
    public void setIsbn(int isbn) { 
       this.isbn = isbn; 
    }
@@ -41,7 +34,6 @@ public class Book implements Serializable {
       return bookName; 
    } 
    
-   @XmlElement 
    public void setBookName(String bookName) { 
       this.bookName = bookName; 
    } 
@@ -50,7 +42,6 @@ public class Book implements Serializable {
       return publisherName; 
    } 
    
-   @XmlElement 
    public void setPublisherName(String publisherName) { 
       this.publisherName = publisherName; 
    }
@@ -59,7 +50,6 @@ public class Book implements Serializable {
 	   return numberOfPages; 
    }
 	   
-   @XmlElement 
    public void setNumberOfPages(int numberOfPages) { 
       this.numberOfPages = numberOfPages; 
    }
@@ -68,7 +58,6 @@ public class Book implements Serializable {
 	   return stock;
    }
 	   
-   @XmlElement 
    public void setStock(int stock) { 
       this.stock = stock; 
    }
