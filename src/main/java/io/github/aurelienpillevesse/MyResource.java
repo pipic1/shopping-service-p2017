@@ -74,7 +74,7 @@ public class MyResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Book getBook(
     	@QueryParam("account") int id,
-    	@DefaultValue("-1") @QueryParam("isbn") int isbn,
+    	@DefaultValue("-1") @QueryParam("isbn") String isbn,
     	@QueryParam("from") String from,
     	@QueryParam("to") String to,
     	@QueryParam("corr") int corr
@@ -83,7 +83,7 @@ public class MyResource {
     	Book book = null;
 		book = dao.find(isbn);
 
-		if(book.getIsbn() != 0) {
+		if(book.getIsbn() != null) {
 	    	Client client = ClientBuilder.newClient();
 	    	WebTarget target = client.target("https://stock-service-p2017.herokuapp.com").path("bookStock");
 	    	Response r = target.request().post(Entity.json(book));

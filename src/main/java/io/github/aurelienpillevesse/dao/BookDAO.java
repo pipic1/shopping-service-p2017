@@ -20,12 +20,12 @@ public class BookDAO extends DAO<Book> {
 		return false;
 	}
 
-	public Book find(int isbn) {
+	public Book find(String isbn) {
 		Book book = new Book();
 		
 		try {
 			this.st = this.connect.prepareStatement("select * from books where isbn = ?");
-			this.st.setInt(1, isbn);
+			this.st.setString(1, isbn);
 			this.rs = this.st.executeQuery();
 			while (rs.next()) {
 				book.setIsbn(this.rs.getString("isbn"));

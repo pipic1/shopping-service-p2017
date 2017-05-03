@@ -47,5 +47,5 @@ public abstract class DAO<T> {
     * @param isbn
     * @return T
     */
-    public abstract T find(int isbn);
+    public abstract T find(String isbn);
 }
