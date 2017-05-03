@@ -82,15 +82,17 @@ public class MyResource {
     	DAO<Book> dao = new BookDAO();
     	Book book = null;
 		book = dao.find(isbn);
+		
+		return book;
 
-		if(book.getIsbn() != null) {
+		/*if(book.getIsbn() != null) {
 	    	Client client = ClientBuilder.newClient();
 	    	WebTarget target = client.target("https://stock-service-p2017.herokuapp.com").path("bookStock");
 	    	Response r = target.request().post(Entity.json(book));
 	    	return r.readEntity(Book.class);
     	}
 		
-		return null;
+		return null;*/
     }
 
     /*private static Connection getConnection() throws URISyntaxException, SQLException {
