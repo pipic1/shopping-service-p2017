@@ -61,4 +61,8 @@ public class Book {
    public void setStock(int stock) { 
       this.stock = stock; 
    }
+   
+   public String toString() {
+	   return "Book : " + this.getBookName() + ", " + this.getIsbn() + ", " + this.getNumberOfPages() + ", " + this.getPublisherName() + ", " + this.getStock();
+   }
 } 
