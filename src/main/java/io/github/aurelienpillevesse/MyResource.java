@@ -16,6 +16,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.DefaultValue;
@@ -78,25 +79,18 @@ public class MyResource {
     	@QueryParam("to") String to,
     	@QueryParam("corr") int corr
     ) {
+    	DAO<Book> dao = new BookDAO();
     	Book book = null;
-    	int output = -1;
-
-		DAO<Book> dao = new BookDAO();
-
 		book = dao.find(isbn);
 
-		/*if(book.getIsbn() == output == isbn && isbn != -1) {
+		if(book.getIsbn() != 0) {
 	    	Client client = ClientBuilder.newClient();
-	    	WebTarget target = client
-	    			.target("https://stock-service-p2017.herokuapp.com")
-	    			.path("bookStock")
-	    			.queryParam("isbn", isbn);
-	    	Response r = target.request(MediaType.TEXT_PLAIN).get();
-	    	return "(isbn available) - response: " + r.readEntity(String.class);
-	    	//return "Book available";
-    	}*/
-    	//return "Book unvailable";
-		return book;
+	    	WebTarget target = client.target("https://stock-service-p2017.herokuapp.com").path("bookStock");
+	    	Response r = target.request().put(Entity.json(book));
+	    	return r.readEntity(Book.class);
+    	}
+		
+		return null;
     }
 
     /*private static Connection getConnection() throws URISyntaxException, SQLException {
