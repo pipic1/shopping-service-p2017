@@ -6,15 +6,15 @@ package io.github.aurelienpillevesse.model;
 
 public class Book {
 
-   private Integer isbn;
+   private int isbn;
    private String bookName; 
    private String publisherName;
-   private Integer numberOfPages;
-   private Integer stock;
+   private int numberOfPages;
+   private int stock;
    
    public Book(){}  
    
-   public Book(Integer isbn, String bookName, String publisherName, Integer numberOfPages, Integer stock){ 
+   public Book(int isbn, String bookName, String publisherName, int numberOfPages, int stock){ 
       this.isbn = isbn;
       this.bookName = bookName;
       this.publisherName = publisherName;
@@ -22,11 +22,11 @@ public class Book {
       this.stock = stock;
    }  
     
-   public Integer getIsbn() {
+   public int getIsbn() {
       return isbn; 
    }
    
-   public void setIsbn(Integer isbn) { 
+   public void setIsbn(int isbn) { 
       this.isbn = isbn; 
    }
    
@@ -46,19 +46,19 @@ public class Book {
       this.publisherName = publisherName; 
    }
    
-   public Integer getNumberOfPages() {
+   public int getNumberOfPages() {
 	   return numberOfPages; 
    }
 	   
-   public void setNumberOfPages(Integer numberOfPages) { 
+   public void setNumberOfPages(int numberOfPages) { 
       this.numberOfPages = numberOfPages; 
    }
    
-   public Integer getStock() {
+   public int getStock() {
 	   return stock;
    }
 	   
-   public void setStock(Integer stock) { 
+   public void setStock(int stock) { 
       this.stock = stock; 
    }
    
