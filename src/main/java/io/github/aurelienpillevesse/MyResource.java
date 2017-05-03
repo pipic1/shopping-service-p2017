@@ -72,7 +72,7 @@ public class MyResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Book getBook(
+    public String getBook(
     	@QueryParam("account") int id,
     	@DefaultValue("-1") @QueryParam("isbn") String isbn,
     	@QueryParam("from") String from,
@@ -87,7 +87,7 @@ public class MyResource {
 	    	Client client = ClientBuilder.newClient();
 	    	WebTarget target = client.target("https://stock-service-p2017.herokuapp.com").path("bookStock");
 	    	Response r = target.request().post(Entity.json(book));
-	    	return r.readEntity(Book.class);
+	    	return r.readEntity(String.class);
     	}
 		
 		return null;
