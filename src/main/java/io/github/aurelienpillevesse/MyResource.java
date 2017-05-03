@@ -20,6 +20,10 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.DefaultValue;
 
+import io.github.aurelienpillevesse.dao.BookDAO;
+import io.github.aurelienpillevesse.dao.DAO;
+import io.github.aurelienpillevesse.model.Book;
+
 /**
  * Root resource (exposed at "book" path)
  */
@@ -46,7 +50,7 @@ public class MyResource {
     	ResultSet rs;
     	String output = "";
     	output += "isbn = "+ isbn + "\n";
-    	try {		
+    	try {
 			PreparedStatement st = getConnection().prepareStatement("select * from books where ISBN = ? ");
 			st.setInt(1,isbn);
 			//Statement st = getConnection().createStatement();
@@ -64,34 +68,24 @@ public class MyResource {
 		}
     	return output;
     }*/
-   
+
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getBook(
+    @Produces(MediaType.APPLICATION_JSON)
+    public Book getBook(
     	@QueryParam("account") int id,
     	@DefaultValue("-1") @QueryParam("isbn") int isbn,
     	@QueryParam("from") String from,
     	@QueryParam("to") String to,
     	@QueryParam("corr") int corr
     ) {
-    	ResultSet rs = null;
-    	PreparedStatement st = null;
+    	Book book = null;
     	int output = -1;
-    	
-    	try {		
-			st = getConnection().prepareStatement("select * from books where isbn = ?");
-			st.setInt(1, isbn); 
-			rs = st.executeQuery();
-			while (rs.next()) {
-			    output = rs.getInt("isbn");
-			}
-			rs.close();
-			st.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	    
-	if(output == isbn && isbn != -1) {
+
+		DAO<Book> dao = new BookDAO();
+
+		book = dao.find(isbn);
+
+		/*if(book.getIsbn() == output == isbn && isbn != -1) {
 	    	Client client = ClientBuilder.newClient();
 	    	WebTarget target = client
 	    			.target("https://stock-service-p2017.herokuapp.com")
@@ -100,15 +94,16 @@ public class MyResource {
 	    	Response r = target.request(MediaType.TEXT_PLAIN).get();
 	    	return "(isbn available) - response: " + r.readEntity(String.class);
 	    	//return "Book available";
-    	}
-    	return "Book unvailable";
+    	}*/
+    	//return "Book unvailable";
+		return book;
     }
-    
-    private static Connection getConnection() throws URISyntaxException, SQLException {
+
+    /*private static Connection getConnection() throws URISyntaxException, SQLException {
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         return DriverManager.getConnection(dbUrl);
     }
-    
+
     private static Connection getConnection2() throws URISyntaxException, SQLException {
         URI dbUri = new URI(System.getenv("DATABASE_URL"));
 
@@ -117,5 +112,5 @@ public class MyResource {
         String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
 
         return DriverManager.getConnection(dbUrl, username, password);
-    }
+    }*/
 }
