@@ -29,7 +29,7 @@ public class BookDAO extends DAO<Book> {
 			this.rs = this.st.executeQuery();
 			while (rs.next()) {
 				book.setIsbn(this.rs.getString("isbn"));
-				book.setStock(this.rs.getInt("stock"));
+				//book.setStock(this.rs.getInt("stock"));
 			}
 			this.rs.close();
 			this.st.close();
