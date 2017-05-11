@@ -24,6 +24,7 @@ import javax.ws.rs.DefaultValue;
 import io.github.aurelienpillevesse.dao.BookDAO;
 import io.github.aurelienpillevesse.dao.DAO;
 import io.github.aurelienpillevesse.model.Book;
+import io.github.aurelienpillevesse.model.CustomResponse;
 
 /**
  * Root resource (exposed at "book" path)
@@ -78,20 +79,20 @@ public class MyResource {
     	@QueryParam("from") String from,
     	@QueryParam("to") String to,
     	@QueryParam("corr") int corr
-    ) {
+        ) {
     	DAO<Book> dao = new BookDAO();
     	Book book = null;
-		book = dao.find(isbn);
+      book = dao.find(isbn);
 
-		if(book.getIsbn() != null) {
-	    	Client client = ClientBuilder.newClient();
-	    	WebTarget target = client.target("https://stock-service-p2017.herokuapp.com").path("bookStock");
-	    	Response r = target.request().post(Entity.json(book));
-	    	return r.readEntity(Book.class);
-    	}
-		
-		return null;
-    }
+      if(book.getIsbn() != null) {
+          Client client = ClientBuilder.newClient();
+          WebTarget target = client.target("https://stock-service-p2017.herokuapp.com").path("bookStock");
+          Response r = target.request().post(Entity.json(book));
+          return r.readEntity(Book.class);
+      }
+      
+      return null;
+  }
 
     /*private static Connection getConnection() throws URISyntaxException, SQLException {
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
