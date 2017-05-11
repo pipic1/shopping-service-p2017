@@ -6,22 +6,22 @@ package io.github.aurelienpillevesse.model;
 
 public class CustomResponse {
 
-   private Object obj;
+   private Object data;
    private String message;
    
    public CustomResponse(){}  
    
-   public CustomResponse(Object obj, String message){ 
-      this.obj = obj;
+   public CustomResponse(Object data, String message){ 
+      this.data = data;
       this.message = message;
    }  
 
-   public String getObj() {
-      return obj; 
+   public Object getData() {
+      return data; 
    }
    
-   public void setObj(Object obj) { 
-      this.obj = obj; 
+   public void setData(Object data) { 
+      this.data = data; 
    }
    
    public String getMessage() { 
@@ -33,6 +33,6 @@ public class CustomResponse {
    } 
    
    public String toString() {
-      return "CustomResponse : " + this.getObj() + ", " + this.getMessage();
+      return "CustomResponse : " + this.getData() + ", " + this.getMessage();
    }
 } 
