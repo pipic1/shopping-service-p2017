@@ -37,10 +37,12 @@ public class BookDAO extends DAO<Book> {
 				
 				books.add(book);
 			}
-			this.rs.close();
-			this.st.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+		    try { this.st.close(); } catch (Exception e) { /* ignored */ }
+		    try { this.rs.close(); } catch (Exception e) { /* ignored */ }
+		    try { this.connect.close(); } catch (Exception e) { /* ignored */ }
 		}
 		
 		return books;
@@ -55,11 +57,13 @@ public class BookDAO extends DAO<Book> {
 			this.rs = this.st.executeQuery();
 			while (rs.next()) {
 				book.setIsbn(this.rs.getString("isbn"));
-			}
-			this.rs.close();
-			this.st.close();
+			}			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+		    try { this.st.close(); } catch (Exception e) { /* ignored */ }
+		    try { this.rs.close(); } catch (Exception e) { /* ignored */ }
+		    try { this.connect.close(); } catch (Exception e) { /* ignored */ }
 		}
 		
 		return book;
