@@ -1,15 +1,5 @@
 package io.github.aurelienpillevesse;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.List;
-import java.sql.ResultSet;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -30,6 +20,7 @@ import io.github.aurelienpillevesse.model.CustomResponse;
 /**
  * Root resource (exposed at "book" path)
  */
+@Path("book")
 public class MyResource {
 
     /**
@@ -73,7 +64,6 @@ public class MyResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("book")
     public Book getBook(
     	@QueryParam("account") int id,
     	@DefaultValue("-1") @QueryParam("isbn") String isbn,
@@ -91,19 +81,8 @@ public class MyResource {
           Response r = target.request().post(Entity.json(book));
           return r.readEntity(Book.class);
       }
-      
-      return null;
-    }
-    
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("books")
-    public List<Book> getBooks() {
-    	DAO<Book> dao = new BookDAO();
-    	List<Book> books = null;
-    	books = dao.findAll();
 
-    	return books;
+      return null;
     }
 
     /*private static Connection getConnection() throws URISyntaxException, SQLException {
