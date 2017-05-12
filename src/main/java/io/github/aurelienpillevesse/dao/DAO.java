@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public abstract class DAO<T> {
     protected Connection connect = null;
@@ -48,4 +49,10 @@ public abstract class DAO<T> {
     * @return T
     */
     public abstract T find(String isbn);
+    
+    /**
+     * Search all books
+     * @return T
+     */
+     public abstract List<T> findAll();
 }
