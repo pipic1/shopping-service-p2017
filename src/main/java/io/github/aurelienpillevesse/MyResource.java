@@ -49,6 +49,7 @@ public class MyResource {
     	//return r.readEntity(Book.class);
     	
     	book.setStock(r.readEntity(Book.class).getStock());
+    	book.setBookName(r.readEntity(Book.class).getBookName());
     	
     	cr.setData(book);
     	cr.setMessage("Book available");
