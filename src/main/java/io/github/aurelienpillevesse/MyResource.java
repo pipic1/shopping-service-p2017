@@ -24,7 +24,7 @@ import io.github.aurelienpillevesse.model.CustomResponse;
 public class MyResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public CustomResponse getBook(
+    public Response getBook(
     	@QueryParam("account") int id,
     	@DefaultValue("-1") @QueryParam("isbn") String isbn,
     	@QueryParam("from") String from,
@@ -40,17 +40,18 @@ public class MyResource {
     	if(book.getIsbn() == null) {
     		cr.setData(null);
         	cr.setMessage("Book unavailable");
-        	return cr;
+        	return Response.status(404).entity(cr).build();
     	}
     	
     	Client client = ClientBuilder.newClient();
     	WebTarget target = client.target("https://stock-service-p2017.herokuapp.com").path("bookStock");
     	Response r = target.request().post(Entity.json(book));
     	
-    	book.setStock(r.readEntity(Book.class).getStock());
+    	book.setStock(r.readEntity(CustomResponse.class).getData().getStock());
     	
     	cr.setData(book);
     	cr.setMessage("Book available");
-    	return cr;
+    	
+    	return Response.status(200).entity(cr).build();
     }
 }
