@@ -9,16 +9,14 @@ public class Book {
    private String isbn;
    private String bookName; 
    private String publisherName;
-   private int numberOfPages;
    private int stock;
    
    public Book(){}  
    
-   public Book(String isbn, String bookName, String publisherName, int numberOfPages, int stock){ 
+   public Book(String isbn, String bookName, String publisherName, int stock){ 
       this.isbn = isbn;
       this.bookName = bookName;
       this.publisherName = publisherName;
-      this.numberOfPages = numberOfPages;
       this.stock = stock;
    }  
     
@@ -46,14 +44,6 @@ public class Book {
       this.publisherName = publisherName; 
    }
    
-   public int getNumberOfPages() {
-	   return numberOfPages; 
-   }
-	   
-   public void setNumberOfPages(int numberOfPages) { 
-      this.numberOfPages = numberOfPages; 
-   }
-   
    public int getStock() {
 	   return stock;
    }
@@ -63,6 +53,6 @@ public class Book {
    }
    
    public String toString() {
-	   return "Book : " + this.getBookName() + ", " + this.getIsbn() + ", " + this.getNumberOfPages() + ", " + this.getPublisherName() + ", " + this.getStock();
+	   return "Book : " + this.getBookName() + ", " + this.getPublisherName() + ", " + this.getStock();
    }
 } 

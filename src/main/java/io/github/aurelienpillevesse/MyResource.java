@@ -48,9 +48,9 @@ public class MyResource {
     	Response r = target.request().post(Entity.json(book));
     	//return r.readEntity(Book.class);
     	
-    	System.out.println(r.readEntity(Book.class));
+    	book.setStock(r.readEntity(Book.class).getStock());
     	
-    	cr.setData(r.readEntity(Book.class));
+    	cr.setData(book);
     	cr.setMessage("Book available");
     	return cr;
     }
