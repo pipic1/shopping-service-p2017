@@ -39,7 +39,7 @@ public class MyResource {
 
     	if(book.getIsbn() == null) {
     		cr.setData(null);
-        	cr.setData("Book unavailable");
+        	cr.setMessage("Book unavailable");
         	return cr;
     	}
     	

@@ -6,21 +6,21 @@ package io.github.aurelienpillevesse.model;
 
 public class CustomResponse {
 
-   private Object data;
+   private Book data;
    private String message;
    
    public CustomResponse(){}  
    
-   public CustomResponse(Object data, String message){ 
+   public CustomResponse(Book data, String message){ 
       this.data = data;
       this.message = message;
    }  
 
-   public Object getData() {
+   public Book getData() {
       return data; 
    }
    
-   public void setData(Object data) { 
+   public void setData(Book data) { 
       this.data = data; 
    }
    
