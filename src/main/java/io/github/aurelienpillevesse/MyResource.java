@@ -46,7 +46,6 @@ public class MyResource {
     	Client client = ClientBuilder.newClient();
     	WebTarget target = client.target("https://stock-service-p2017.herokuapp.com").path("bookStock");
     	Response r = target.request().post(Entity.json(book));
-    	//return r.readEntity(Book.class);
     	
     	book.setStock(r.readEntity(Book.class).getStock());
     	
