@@ -14,6 +14,7 @@ public abstract class DAO<T> {
 
     public DAO(){
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
+        
         try {
 			this.connect = DriverManager.getConnection(dbUrl);
 		} catch (SQLException e) {
@@ -41,7 +42,7 @@ public abstract class DAO<T> {
     * @param object
     * @return boolean
     */
-    public abstract boolean update(T object);
+    public abstract void updateStock(T object);
 
     /**
     * Search by isbn

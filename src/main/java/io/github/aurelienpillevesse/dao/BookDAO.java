@@ -19,8 +19,20 @@ public class BookDAO extends DAO<Book> {
 		return false;
 	}
 
-	public boolean update(Book object) {
-		return false;
+	public void updateStock(Book book) {		
+		try {
+			this.st = this.connect.prepareStatement("update books set stock = ? where isbn = ?");
+			this.st.setString(1, book.getIsbn());
+			this.st.setInt(2, book.getStock());
+			this.st.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		    try { this.st.close(); } catch (Exception e) { /* ignored */ }
+		    try { this.connect.close(); } catch (Exception e) { /* ignored */ }
+		}
+		
+		return;
 	}
 	
 	public List<Book> findAll() {
@@ -58,6 +70,7 @@ public class BookDAO extends DAO<Book> {
 			while (rs.next()) {
 				book.setIsbn(this.rs.getString("isbn"));
 				book.setBookName(this.rs.getString("book_name"));
+				book.setStock(this.rs.getInt("stock"));
 			}			
 		} catch (Exception e) {
 			e.printStackTrace();

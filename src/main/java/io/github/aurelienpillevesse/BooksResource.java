@@ -16,11 +16,14 @@ import io.github.aurelienpillevesse.model.Book;
 public class BooksResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Book> getBooks() {
+    public String getBooks() {
     	DAO<Book> dao = new BookDAO();
     	List<Book> books = null;
     	books = dao.findAll();
+    	
+    	String dbUrl = System.getenv("JDBC_DATABASE_URL");
+        return dbUrl;
 
-    	return books;
+    	//return books;
     }
 }
