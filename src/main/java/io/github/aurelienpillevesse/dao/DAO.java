@@ -42,7 +42,7 @@ public abstract class DAO<T> {
     * @param object
     * @return boolean
     */
-    public abstract void updateStock(T object);
+    public abstract void updateStock(T object, int quantity);
 
     /**
     * Search by isbn
