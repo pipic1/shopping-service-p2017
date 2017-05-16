@@ -19,7 +19,7 @@ public class BookDAO extends DAO<Book> {
 		return false;
 	}
 
-	public void updateStock(Book book, int quantity) {		
+	public void updateStock(Book book, int quantity) {
 		try {
 			this.st = this.connect.prepareStatement("update books set stock = ? where isbn = ?");
 			this.st.setString(1, book.getIsbn());

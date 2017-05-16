@@ -41,7 +41,7 @@ public class BuyBook {
     	}
     	
     	cr.setData(null);
-    	cr.setMessage("Order ready");
+    	cr.setMessage("Order ready" + quantity);
     	
     	return Response.status(200).entity(cr).build();
 	}	
