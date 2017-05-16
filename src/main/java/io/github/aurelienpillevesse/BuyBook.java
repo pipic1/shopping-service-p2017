@@ -37,7 +37,7 @@ public class BuyBook {
     	if(quantity > book.getStock()) {
     		//commander de nouveaux livres
     	} else {
-    		dao.updateStock(book);
+    		dao.updateStock(book, quantity);
     	}
     	
     	cr.setData(null);
