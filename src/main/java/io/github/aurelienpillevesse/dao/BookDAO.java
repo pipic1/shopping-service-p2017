@@ -20,10 +20,12 @@ public class BookDAO extends DAO<Book> {
 	}
 
 	public void updateStock(Book book, int quantity) {
+		int newStock = book.getStock() - quantity;
+		
 		try {
 			this.st = this.connect.prepareStatement("update books set stock = ? where isbn = ?");
 			this.st.setString(1, book.getIsbn());
-			this.st.setInt(2, book.getStock() - quantity);
+			this.st.setInt(2, newStock);
 			this.st.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
