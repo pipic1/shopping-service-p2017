@@ -24,8 +24,8 @@ public class BookDAO extends DAO<Book> {
 		
 		try {
 			this.st = this.connect.prepareStatement("update books set stock = ? where isbn = ?");
-			this.st.setString(1, book.getIsbn());
-			this.st.setInt(2, newStock);
+			this.st.setInt(1, newStock);
+			this.st.setString(2, book.getIsbn());
 			this.st.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
