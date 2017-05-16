@@ -26,9 +26,9 @@ public class BuyBook {
     	@DefaultValue("-1") @QueryParam("quantity") int quantity
     ) {    			
 		CustomResponse cr = new CustomResponse();
-    	DAO<Book> dao = new BookDAO();
+		DAO<Book> daoFind = new BookDAO();
     	Book book = null;
-    	book = dao.find(isbn);
+    	book = daoFind.find(isbn);
     	
     	if(isbn == "-1" || quantity == -1 || book.getIsbn() == null) {
 			return null;
@@ -37,7 +37,8 @@ public class BuyBook {
     	if(quantity > book.getStock()) {
     		//commander de nouveaux livres
     	} else {
-    		dao.updateStock(book, quantity);
+    		DAO<Book> daoUpdate = new BookDAO();
+    		daoUpdate.updateStock(book, quantity);
     	}
     	
     	cr.setData(null);
