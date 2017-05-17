@@ -7,6 +7,10 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -35,7 +39,11 @@ public class BuyBook {
 		}
     	
     	if(quantity > book.getStock()) {
-    		//commander de nouveaux livres
+    		Client client = ClientBuilder.newClient();
+        	WebTarget target = client.target("https://inf63app12.appspot.com").path("ws");
+        	String sendData = String.format("\r\n{\r\n\"isbn\": \"%s\",\r\n\"quantity\": %2d\r\n}", book.getIsbn(), quantity - book.getStock());
+        	Response r = target.request().post(Entity.entity(sendData, MediaType.APPLICATION_JSON));
+        	return r;
     	} else {
     		DAO<Book> daoUpdate = new BookDAO();
     		daoUpdate.updateStock(book, quantity);
