@@ -42,11 +42,12 @@ public class BuyBook {
     		Client client = ClientBuilder.newClient();
         	WebTarget target = client.target("https://inf63app12.appspot.com/ws");
         	
-        	//int tmpCalc = quantity - book.getStock();
         	String input = "{\"quantity\":" + quantity + ",\"stock\":\"" + book.getStock() +",\"isbn\":\"" + book.getIsbn() + "\"}";
         	Response r = target.request().put(Entity.json(input));
 
-        	//renvoyer cr avec autre message
+        	if(r.getStatus() == 400) {
+        		return Response.status(r.getStatus()).entity(r.readEntity(CustomResponse.class).getMessage()).build();
+        	}
     	} else {
     		DAO<Book> daoUpdate = new BookDAO();
     		daoUpdate.updateStock(book, quantity);
