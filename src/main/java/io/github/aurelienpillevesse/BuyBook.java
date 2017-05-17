@@ -47,6 +47,7 @@ public class BuyBook {
         	
         	Response r = target.request().put(Entity.entity(input, MediaType.APPLICATION_JSON));
         	return r;
+        	//à enlever
     	} else {
     		DAO<Book> daoUpdate = new BookDAO();
     		daoUpdate.updateStock(book, quantity);
