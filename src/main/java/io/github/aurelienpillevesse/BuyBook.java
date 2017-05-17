@@ -42,8 +42,8 @@ public class BuyBook {
     		Client client = ClientBuilder.newClient();
         	WebTarget target = client.target("https://inf63app12.appspot.com/ws");
         	
-        	String input = "{\"quantity\":" + quantity + ",\"stock\":\"" + book.getStock() +",\"isbn\":\"" + book.getIsbn() + "\"}";
-        	Response r = target.request().put(Entity.json(input));
+        	String input = "{\"quantity\":" + quantity + ",\"stock\": " + book.getStock() + ",\"isbn\":\"" + book.getIsbn() + "\"}";
+        	Response r = target.request().put(Entity.json(input), Response.class);
 
         	if(r.getStatus() == 400) {
         		return Response.status(r.getStatus()).entity(r.readEntity(CustomResponse.class).getMessage()).build();
