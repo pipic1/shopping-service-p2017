@@ -43,9 +43,9 @@ public class BuyBook {
         	WebTarget target = client.target("https://inf63app12.appspot.com/ws");
         	
         	int tmpCalc = quantity - book.getStock();
-        	String input = "{\"isbn\":\""+ book.getIsbn() + "\",\"quantity\":\"" + tmpCalc + "\"}";
-        	
-        	Response r = target.request().put(Entity.entity(input, MediaType.APPLICATION_JSON));
+        	//String input = "{\"isbn\":\""+ book.getIsbn() + "\",\"quantity\":\"" + tmpCalc + "\"}";
+        	String input = "{\"quantity\":40,\"isbn\":\"123456789\"}";
+        	Response r = target.request().put(Entity.json(input));
         	return r;
         	//à enlever
     	} else {
